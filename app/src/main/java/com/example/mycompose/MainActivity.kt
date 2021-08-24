@@ -23,7 +23,6 @@ import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
@@ -304,7 +303,7 @@ fun RegisterFragment(navController: NavController) {
                     .wrapContentSize(Alignment.Center)) {
                     Image(
                         painter = painterResource(id = R.drawable.ic_baseline_signal_cellular_connected_no_internet_4_bar_24),
-                        contentDescription = "", contentScale = ContentScale.FillHeight
+                        contentDescription = ""
                     )
                 }
             }
