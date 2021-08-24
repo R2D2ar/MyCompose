@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MyCompose</string>
+    <string name="profile">Hallo</string>
+    <string name="friends_list">World</string>
+</resources>
