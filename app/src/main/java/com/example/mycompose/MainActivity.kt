@@ -303,7 +303,7 @@ fun RegisterFragment(navController: NavController) {
                     .wrapContentSize(Alignment.Center)) {
                     Image(
                         painter = painterResource(id = R.drawable.ic_baseline_signal_cellular_connected_no_internet_4_bar_24),
-                        contentDescription = ""
+                        contentDescription = null
                     )
                 }
             }
