@@ -305,14 +305,12 @@ fun RegisterFragment(navController: NavController) {
                         painter = painterResource(id = R.drawable.ic_baseline_signal_cellular_connected_no_internet_4_bar_24),
                         contentDescription = null
                     )
+                    Text(text = "Error", Modifier.padding(top = 30.dp))
                 }
             }
         }
     }
-
-
-
-
+    
     Column(
         modifier = Modifier
             .fillMaxSize()
