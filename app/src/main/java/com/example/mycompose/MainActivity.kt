@@ -41,6 +41,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.mycompose.main.MainPage
 import com.example.mycompose.networking.networking
 import com.example.mycompose.ui.theme.MyComposeTheme
 import kotlinx.coroutines.delay
@@ -123,46 +124,6 @@ fun LoginRegisterFragment(navController: NavHostController){
     }
 }
 
-
-
-
-
-
-
-//MainPage
-@SuppressLint("CoroutineCreationDuringComposition")
-@Composable
-fun MainPage(navController: NavController, backPressedDispatcher: OnBackPressedDispatcher) {
-    navController.enableOnBackPressed(false)
-
-    val backDispatcher = LocalBackPressedDispatcher.current
-    val callback = remember{
-        object : OnBackPressedCallback(true){
-            override fun handleOnBackPressed() {
-                navController.navigate("login_register")
-            }
-        }
-    }
-    
-    DisposableEffect(key1 =  backDispatcher){
-        backDispatcher.addCallback(callback)
-        onDispose {
-            callback.remove()
-        }
-    }
-
-
-    var test by remember {
-        mutableStateOf("")
-    }
-    Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
-       Text(text = test)
-    }
-
-}
-
-
-
 //Intro
 @Composable
 fun StartFragment(navController: NavController){
@@ -202,7 +163,7 @@ fun LogInFragment(navController: NavController){
     var password by remember {
         mutableStateOf("null")
     }
-    SideEffect {
+    LaunchedEffect(true) {
         coroutineScope.launch {
             email = networking().toString()
             Log.d(email, "Test Test Test Test Test")
