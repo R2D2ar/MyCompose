@@ -1,11 +1,14 @@
-package com.example.mycompose.main
+package com.example.mycompose.screen_main
 
 import android.annotation.SuppressLint
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.OnBackPressedDispatcher
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -13,6 +16,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.*
+import androidx.compose.runtime.R
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -22,11 +26,9 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.mycompose.LocalBackPressedDispatcher
-import com.example.mycompose.R
+import com.example.mycompose.ui.LocalBackPressedDispatcher
 import com.example.mycompose.ui.theme.Orange500
 import kotlinx.coroutines.launch
-
 
 enum class AnimationState{
     START,
@@ -67,41 +69,42 @@ fun MainPage(navController: NavController, backPressedDispatcher: OnBackPressedD
             TopAppBar(modifier = Modifier
                 .clip(RoundedCornerShape(bottomStart = 8.dp, bottomEnd = 8.dp)),
                 navigationIcon = {
-                Crossfade(targetState = animationState) {
-                    currentstate ->
-                    when(currentstate){
-                        AnimationState.START ->
-                            Icon(
-                                Icons.Default.Menu, null,
-                                modifier = Modifier
-                                    .padding(start = 10.dp, end = 10.dp)
-                                    .fillMaxSize()
-                                    .clickable(onClick = {
-                                        scope.launch {
-                                            //scaffoldstate.drawerState.open()
-                                            animationState = AnimationState.STOP
+                    Crossfade(targetState = animationState) {
+                            currentstate ->
+                        when(currentstate){
+                            AnimationState.START ->
+                                Icon(
+                                    Icons.Default.Menu, null,
+                                    modifier = Modifier
+                                        .padding(start = 10.dp, end = 10.dp)
+                                        .fillMaxSize()
+                                        .clickable(onClick = {
+                                            scope.launch {
+                                                //scaffoldstate.drawerState.open()
+                                                animationState = AnimationState.STOP
 
-                                        }
-                                    })
-                            )
-                        AnimationState.STOP ->
-                            Icon(
-                                painter = painterResource(id = R.drawable.ic_baseline_signal_cellular_connected_no_internet_4_bar_24), null,
-                                modifier = Modifier
-                                    .padding(start = 10.dp, end = 10.dp)
-                                    .fillMaxSize()
-                                    .clickable(onClick = {
-                                        scope.launch {
-                                            //scaffoldstate.drawerState.open()
-                                            animationState = AnimationState.START
-                                        }
-                                    })
-                            )
+                                            }
+                                        })
+                                )
+                            AnimationState.STOP ->
+                                Icon(
+                                    painter = painterResource(
+                                        id = com.example.mycompose.R.drawable.ic_baseline_signal_cellular_connected_no_internet_4_bar_24), null,
+                                        modifier = Modifier
+                                        .padding(start = 10.dp, end = 10.dp)
+                                        .fillMaxSize()
+                                        .clickable(onClick = {
+                                            scope.launch {
+                                                //scaffoldstate.drawerState.open()
+                                                animationState = AnimationState.START
+                                            }
+                                        })
+                                )
+                        }
                     }
-                }
 
-            }, title = {Text("TopAppBar")},
-            backgroundColor = Orange500)  },
+                }, title = {Text("TopAppBar")},
+                backgroundColor = Orange500)  },
 
 
         content = {MainContent()},
