@@ -15,7 +15,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.mycompose.networking.networking
+import com.example.mycompose.networking.getName
 import kotlinx.coroutines.launch
 
 @Composable
@@ -31,7 +31,7 @@ fun LogInFragment(navController: NavController){
     }
     LaunchedEffect(true) {
         coroutineScope.launch {
-            email = networking().toString()
+            email = getName().toString()
             Log.d(email, "Test Test Test Test Test")
         }
     }

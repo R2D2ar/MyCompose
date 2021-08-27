@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+
 }
 
 android {
@@ -83,4 +84,7 @@ dependencies {
     implementation ("io.ktor:ktor-client-serialization:$ktor_version")
     implementation ("io.ktor:ktor-client-android:$ktor_version")
 
+
 }
+
+

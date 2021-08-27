@@ -26,7 +26,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.mycompose.ui.LocalBackPressedDispatcher
+import com.example.mycompose.LocalBackPressedDispatcher
 import com.example.mycompose.ui.theme.Orange500
 import kotlinx.coroutines.launch
 
@@ -37,9 +37,8 @@ enum class AnimationState{
 
 
 //MainPage
-@SuppressLint("CoroutineCreationDuringComposition")
 @Composable
-fun MainPage(navController: NavController, backPressedDispatcher: OnBackPressedDispatcher) {
+fun MainPage(navController: NavController) {
     navController.enableOnBackPressed(false)
     var animationState: AnimationState
             by remember { mutableStateOf(AnimationState.STOP) }
@@ -63,53 +62,60 @@ fun MainPage(navController: NavController, backPressedDispatcher: OnBackPressedD
         }
     }
 
-    Scaffold(
-        scaffoldState = scaffoldstate,
-        topBar = {
-            TopAppBar(modifier = Modifier
-                .clip(RoundedCornerShape(bottomStart = 8.dp, bottomEnd = 8.dp)),
-                navigationIcon = {
-                    Crossfade(targetState = animationState) {
-                            currentstate ->
-                        when(currentstate){
-                            AnimationState.START ->
-                                Icon(
-                                    Icons.Default.Menu, null,
-                                    modifier = Modifier
-                                        .padding(start = 10.dp, end = 10.dp)
-                                        .fillMaxSize()
-                                        .clickable(onClick = {
-                                            scope.launch {
-                                                //scaffoldstate.drawerState.open()
-                                                animationState = AnimationState.STOP
-
-                                            }
-                                        })
-                                )
-                            AnimationState.STOP ->
-                                Icon(
-                                    painter = painterResource(
-                                        id = com.example.mycompose.R.drawable.ic_baseline_signal_cellular_connected_no_internet_4_bar_24), null,
+    Column(modifier = Modifier
+        .fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally) {
+        Scaffold(
+            scaffoldState = scaffoldstate,
+            topBar = {
+                TopAppBar(modifier = Modifier
+                    .clip(RoundedCornerShape(bottomStart = 8.dp, bottomEnd = 8.dp)),
+                    navigationIcon = {
+                        Crossfade(targetState = animationState) {
+                                currentstate ->
+                            when(currentstate){
+                                AnimationState.START ->
+                                    Icon(
+                                        Icons.Default.Menu, null,
                                         modifier = Modifier
-                                        .padding(start = 10.dp, end = 10.dp)
-                                        .fillMaxSize()
-                                        .clickable(onClick = {
-                                            scope.launch {
-                                                //scaffoldstate.drawerState.open()
-                                                animationState = AnimationState.START
-                                            }
-                                        })
-                                )
+                                            .padding(start = 10.dp, end = 10.dp)
+                                            .fillMaxSize()
+                                            .clickable(onClick = {
+                                                scope.launch {
+                                                    //scaffoldstate.drawerState.open()
+                                                    animationState = AnimationState.STOP
+
+                                                }
+                                            })
+                                    )
+                                AnimationState.STOP ->
+                                    Icon(
+                                        painter = painterResource(
+                                            id = com.example.mycompose.R.drawable.ic_baseline_signal_cellular_connected_no_internet_4_bar_24), null,
+                                        modifier = Modifier
+                                            .padding(start = 10.dp, end = 10.dp)
+                                            .fillMaxSize()
+                                            .clickable(onClick = {
+                                                scope.launch {
+                                                    //scaffoldstate.drawerState.open()
+                                                    animationState = AnimationState.START
+                                                }
+                                            })
+                                    )
+                            }
                         }
-                    }
 
-                }, title = {Text("TopAppBar")},
-                backgroundColor = Orange500)  },
+                    }, title = {Text("TopAppBar")},
+                    backgroundColor = Orange500)  },
 
 
-        content = {MainContent()},
-        drawerContent = { DrawerContent()}
-    )
+            content = {MainContent()},
+            drawerContent = { DrawerContent()}
+        )
+    }
+
+
 
 
 
